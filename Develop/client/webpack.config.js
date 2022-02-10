@@ -1,6 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+//const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
 const { InjectManifest } = require('workbox-webpack-plugin');
 
@@ -20,13 +20,13 @@ module.exports = () => {
       path: path.resolve(__dirname, 'dist'),
     },
     plugins: [
-      newHtmlWebpackPlugin({
+      new HtmlWebpackPlugin({
         temple:'./index.html',
         title:'Jate'
       }),
       new InjectManifest({
         swSrc: './src-sw.js',
-        
+        swDest: '/src-sw.js'
       }),
       new WebpackPwaManifest({
         fingerprints: false,
@@ -38,6 +38,9 @@ module.exports = () => {
         theme_color: '#225ca3',
         start_url: '/',
         publicPath: '/',
+        orientation: 'portrait',
+        display:'standalone',
+        crossorigin: 'use-credentials',
         icons: [
           {
             src: path.resolve('src/images/logo.png'),
